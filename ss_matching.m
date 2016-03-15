@@ -16,7 +16,7 @@ initial_fast_RT_window = 75;
 num_rewards = 1;
 reward_dur = 140;
 samp_reward_dur = 0;
-iti_dur = 2000
+iti_dur = 2000;
 ind = 0;
 present_x = 0;
 present_y = 0;
@@ -41,6 +41,7 @@ final_on = 27;
 final_off = 28;
 loc_cue_on = 182;
 loc_cue_off = 183;
+reward_given = 96;
 
 loc_cue = 2;
 fix_dot = 1;
@@ -67,13 +68,13 @@ xloc = poss_xs(use_x);
 yloc = poss_ys(use_y);
 
 % choose non-match location
-if cond == 2 | cond == 4
+if cond == 2 || cond == 4
     xcands = 1:length(poss_xs);
     ycands = 1:length(poss_ys);
     xcands(use_x) = [];
     ycands(use_y) = [];
-    use_nonx = randsample(xcands, 1)
-    use_nony = randsample(ycands, 1)
+    use_nonx = randsample(xcands, 1);
+    use_nony = randsample(ycands, 1);
     non_xloc = poss_xs(use_nonx);
     non_yloc = poss_ys(use_nony);
     test_time = ceil(test1_nonmatch_rand*rand())+ ...
@@ -87,8 +88,6 @@ else
     match = 1;
     img_2 = 4;
 end
-
-
 
 [ontarget, rt] = eyejoytrack('acquiretouch', [1], [3.0], wait_for_touch);
 if ~ontarget,
@@ -176,7 +175,7 @@ elseif ~ontarget(2)
 end
 
 reposition_object(img_2, non_xloc, non_yloc);
-toggleobject(img_2,'eventmarker', test_on); % turn off sample stim
+toggleobject(img_2,'eventmarker', test_on); 
 [ontarget, rt] = eyejoytrack('holdtouch', [1], [3.0], 'holdfix', ...
                              [1], [fix_window_radius], ...
                              test_time);
@@ -185,7 +184,7 @@ toggleobject(img_2,'eventmarker', test_off); % turn off
 if match
     toggleobject(1,'eventmarker',fixation_off); % turn off
                                                 % fixation spot
-    if ontarget(1) % if lever break 
+    if ~ontarget(1) % if lever break 
         trialerror(correct); %lever break ->>> EARLY RESPONSE? WAS 2
         eventmarker(bar_up); %bar up (release)
         rt=NaN;
@@ -221,8 +220,8 @@ else
     toggleobject(img_1,'eventmarker', final_off); % turn off
     toggleobject(1,'eventmarker',fixation_off); % turn off
                                                 % fixation spot
-    if ontarget(1) % if lever break 
-        trialerror(correct); %lever break ->>> EARLY RESPONSE? WAS 2
+    if ~ontarget(1) % if lever break 
+        trialerror(correct); 
         eventmarker(bar_up); %bar up (release)
         rt=NaN;
         eventmarker(reward_given);

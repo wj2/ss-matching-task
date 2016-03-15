@@ -1,0 +1,5 @@
+Condition	Info				Frequency	Block	Timing File		TaskObject#1			TaskObject#2                            TaskObject#3          TaskObject#4
+1		'shape','match-match'		1		1	ss_matching		crc(0.2,[1 1 1],1,0,0)		sqr(3, [1 1 1], 1, 0, 0)		gen(someimg,-3,0)     gen(someimg, -3,0)		
+2		'shape','match-nonmatch'	1		1	ss_matching		crc(0.2,[1 1 1],1,0,0)		sqr(3, [1 1 1], 1, 0, 0)		gen(someimg,-3,0)     gen(someimg, -3,0)
+3		'shape','nonmatch-match'	1		1	ss_matching		crc(0.2,[1 1 1],1,0,0)		sqr(3, [1 1 1], 1, 0, 0)		gen(someimg,-3,0)     gen(someimg, -3,0)
+4		'shape','nonmatch-nonmatch'	1		1	ss_matching		crc(0.2,[1 1 1],1,0,0)		sqr(3, [1 1 1], 1, 0, 0)		gen(someimg,-3,0)     gen(someimg, -3,0)
